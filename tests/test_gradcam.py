@@ -1,7 +1,7 @@
 from pathlib import Path
 
-import medmnist
 import numpy as np
+from PIL import Image
 
 from src.gradcam import (
     CLASS_NAMES,
@@ -10,21 +10,12 @@ from src.gradcam import (
 )
 
 
+SAMPLE_IMAGE = Path(__file__).resolve().parents[1] / "assets" / "Image1.png"
+
+
 def test_gradcam_generation():
-    root = Path(__file__).resolve().parents[1]
-
-    dataset = medmnist.DermaMNIST(
-        split="test",
-        transform=None,
-        size=224,
-        download=True,
-        as_rgb=True,
-        root=str(root / "data"),
-    )
-
-    image, label = dataset[0]
-
-    heatmap, predicted_class, confidence = generate_gradcam(image)
+    with Image.open(SAMPLE_IMAGE) as image:
+        heatmap, predicted_class, confidence = generate_gradcam(image)
 
     assert heatmap.shape == (224, 224)
     assert np.isfinite(heatmap).all()
@@ -36,21 +27,9 @@ def test_gradcam_generation():
 
 
 def test_gradcam_overlay():
-    root = Path(__file__).resolve().parents[1]
-
-    dataset = medmnist.DermaMNIST(
-        split="test",
-        transform=None,
-        size=224,
-        download=True,
-        as_rgb=True,
-        root=str(root / "data"),
-    )
-
-    image, _ = dataset[0]
-
-    heatmap, _, _ = generate_gradcam(image)
-    overlay = create_overlay(image, heatmap)
+    with Image.open(SAMPLE_IMAGE) as image:
+        heatmap, _, _ = generate_gradcam(image)
+        overlay = create_overlay(image, heatmap)
 
     assert overlay.size == (224, 224)
     assert overlay.mode == "RGB"
