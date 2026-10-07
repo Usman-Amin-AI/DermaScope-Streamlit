@@ -1,0 +1,30 @@
+{
+  "architecture": "efficientnet_b0",
+  "dataset": "DermaMNIST",
+  "num_classes": 7,
+  "classes": [
+    "actinic keratoses and intraepithelial carcinoma",
+    "basal cell carcinoma",
+    "benign keratosis-like lesions",
+    "dermatofibroma",
+    "melanoma",
+    "melanocytic nevi",
+    "vascular lesions"
+  ],
+  "image_size": 224,
+  "epochs": 5,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "seed": 42,
+  "device": "cpu",
+  "best_validation_accuracy": 0.8414755732801595,
+  "train_counts": [
+    228,
+    359,
+    769,
+    80,
+    779,
+    4693,
+    99
+  ]
+}

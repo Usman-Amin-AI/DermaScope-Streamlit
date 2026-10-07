@@ -1,0 +1,6 @@
+DermaMNIST Test Results
+
+Accuracy: 0.825935
+Macro Precision: 0.721392
+Macro Recall: 0.826500
+Macro F1: 0.763693
